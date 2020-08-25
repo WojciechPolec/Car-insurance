@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+
+<HEAD>
+    <meta charset="UTF-8">
+    <link href="kaskada.css" rel="stylesheet" type="text/css" />
+    <title> Ubezpieczenie </title>
+</HEAD>
+
+<BODY>
+        <FORM method="POST" action="">
+               
+                <fieldset>
+                        <div>
+                                <h1>UBEZPIECZENIE SAMOCHODU OSOBOWEGO</h1>
+                        </div>
+                        <div class="main">
+                                <div class="marka">
+                                <label>Marka<br />samochodu:</label><br />
+                                <input type="text" size="25" id="marka1" name="marka" autocomplete="off" >
+                                </div>
+                                <div class="model">
+                                <label>Model<br />samochodu:</label><br />
+                                <input type="text" size="25" id="model1" name="model" autocomplete="off" >
+                                </div>
+                                <div class="pojemnosc">
+                                <label>Pojemność<br />silnika:</label><br />
+                                <input type="number" step="0.1" min="0.1" max="9.9" size="25" id="pojemnosc1" name="pojemnosc" autocomplete="off" >
+                                </div>
+                                <div class="przebieg">
+                                <label>Średni roczny<br />przebieg (km):</label><br />
+                                <select id="lista">
+                                        <option id="one" value="0.8">Poniżej 5 000</option>
+                                        <option id="two" value="0.9">5 001 - 7 500</option>
+                                        <option id="three" value="1.1">7 501 - 12 500</option>
+                                        <option id="four" value="1.2">12 501 - 17 500</option>
+                                        <option id="five" value="1.4">Powyżej 17 500</option>
+                                </select>
+                                </div>
+                                <div class="zgoda1">
+                                <input type="checkbox" id="chec" name="checkbox1"><br /><label>Dodatkowe możliwości ubezpieczenia:</label><br>
+                                <input type="radio" id="rd1" name="radio" value="" disabled><br /><label>Podstawowe ubezpieczenie AC</label><br>
+                                <input type="radio" id="rd2" name="radio" value="" disabled><br /><label>Rozszerzone ubezpieczenie z opcją Assistance</label>
+                                </div>
+                                <div class="przyciski">
+                                        <input type="reset" name="rst" id="rst" value="Reset">
+                                        <input type="button" name="btns" id="btn" value="Wyślij">
+                                </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <p id="wypisz"></p>
+                </fieldset>
+                
+        </FORM>
+
+                <script language="JavaScript" type="text/javascript">
+                function suma(){
+                        var koszt;
+                        var cena_pojemnosc=parseFloat(document.getElementById('pojemnosc1').value);
+                        var listEl = document.getElementById('lista');
+                        var cena_przebieg=parseFloat(listEl.options[listEl.selectedIndex].value);
+                        var cena_pojemnosc_stawka=parseFloat(cena_pojemnosc*350);
+                        var cena_przebieg_stawka=parseFloat(cena_przebieg*350);
+                        koszt=cena_pojemnosc_stawka+cena_przebieg_stawka;
+                        if(document.getElementById('chec').checked){
+                                if(document.getElementById('rd1').checked){
+                                        koszt=koszt+550;
+                                }
+                                if(document.getElementById('rd2').checked){
+                                        koszt=koszt+780;
+                                }
+                        }
+                        markaS=document.getElementById('marka1').value;
+                        modelS=document.getElementById('model1').value;
+                        pojemnoscS=document.getElementById('pojemnosc1').value;
+                        document.getElementById('wypisz').innerHTML= "Koszt ubezpieczenia auta " + " ' " + markaS + " " + modelS + " ' " + " o pojemności " + pojemnoscS + " wynosi: " + koszt + " zł";
+
+                }
+                function checkboxStatus(){
+                        if(document.getElementById('chec').checked){
+                                document.getElementById('rd1').disabled=false;
+                                document.getElementById('rd2').disabled=false;
+                        }else{
+                                document.getElementById('rd1').disabled=true;
+                                document.getElementById('rd1').checked=false;
+                                document.getElementById('rd2').disabled=true;
+                                document.getElementById('rd2').checked=false;
+                        }
+                }
+
+var gzk = document.getElementById('btn');
+gzk.addEventListener('click', suma);
+
+var gzk2 = document.getElementById('chec');
+gzk2.addEventListener('click', checkboxStatus);
+
+
+
+
+
+</script>
+
+
+</BODY>
+
+
+
+</html>
